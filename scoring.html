@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./lib/vant@2.11.2/index.css">
+  <link rel="stylesheet" href="./public/css/score.css">
+  <title>评分</title>
+</head>
+<body>
+  <div  id="vue">
+
+    <div class="scoreBody">
+      <div class="zay_header">
+        <div class="iconBack_box">
+            <img class="icon_back" src="./public/imgs/28.png" alt="">
+        </div>
+        <p>招商信诺智爱牙</p>
+    </div>
+    <div class="content">
+      <img class="wzIcon" width="700" height="253" src="./public/imgs/wz.png" alt="">
+      <div class="questions">
+        <div class="question">
+          <div class="title">1. 请问诊所是否有向您致电核实就诊预约的信息？</div>
+          <div class="select">
+            <van-radio-group v-model="call" direction="horizontal">
+              <van-radio name="1" shape="square">有致电
+              </van-radio>
+              <van-radio name="2" shape="square">未有致电</van-radio>
+            </van-radio-group>
+          </div>
+        </div>
+
+
+        <div class="question">
+          <div class="title">2. 在治疗过程中，诊所是否有向您或家属推销诊所其他商品套餐、保险产品？</div>
+          <div class="select">
+            <van-radio-group v-model="popularize" direction="horizontal">
+              <van-radio name="1" shape="square">有
+              </van-radio>
+              <van-radio name="2" shape="square">没有</van-radio>
+              <van-radio name="3" shape="square">不清楚</van-radio>
+            </van-radio-group>
+          </div>
+        </div>
+  
+        <div class="question">
+          <div class="title">3. 请问诊所的预约安排过程是否顺畅？</div>
+          <div class="select">
+            <div class="text">
+              {{text1}}
+            </div>
+            <van-rate v-model="value1" allow-half="true"  @change="onChange1"	    :icon="icon2" :void-icon="icon1" />
+          </div>
+        </div>
+       
+        <div class="question">
+          <div class="title">4. 请问您对诊所服务是否满意？</div>
+          <div class="select">
+            <div class="text">
+              {{text2}}
+            </div>
+            <van-rate v-model="value2" allow-half="true"  @change="onChange2"		    :icon="icon2" :void-icon="icon1" />
+          </div>
+        </div>
+
+        <div class="question">
+          <div class="title">5. 请问您是否愿意向您身边的人推荐超能大白齿科保险？</div>
+          <div class="select">
+            <div class="text">
+              {{text3}}
+            </div>
+            <van-rate v-model="value3" allow-half="true"  @change="onChange3"		    :icon="icon2" :void-icon="icon1" />
+          </div>
+        </div>
+        <div class="question">
+          <div class="title">6. 请问您对我们的保险产品或诊所就诊服务是否有其他改进的建议？</div>
+         <div class="explain">
+          （如有请在以下文本框处填写您的宝贵意见）
+         </div>
+         <textarea name="reworkmes" class="feedback" placeholder="请在此处填写您的意见，限150字以内。"   rows="10"   ></textarea>
+        </div>
+
+
+      </div>
+      <img @click="upForm" class="btnUp" src="./public/imgs/upBtn.png" alt="">
+    </div>
+
+    </div>
+
+<!-- 弹框 -->
+    <van-overlay :show="show" @click="show = false">
+      <div class="wrapper" @click.stop>
+        <div class="block" >
+          <div class="title"> 提交成功</div>  
+          <div class="text">非常感谢您的鼓励与支持
+            祝您生活愉快~</div>
+            <div class="btnClose" @click="show=false">确定</div>
+        </div>
+
+      </div>
+    </van-overlay>
+  </div>
+
+
+     
+   
+  <script src="./public/js/public.js"></script>
+  <script src="./lib/vue/vue.min.js"></script>
+<script src="./lib/vant@2.11.2/vant.min.js"></script>
+  <script>
+    new Vue({
+      el:"#vue",
+      data(){
+        return{
+          call:"1",
+          popularize:"2",
+          value1: 2.5,
+          text1:"一般",
+          value2: 3,
+          text2:"一般",
+          value3: 4,
+          text3:"满意",
+          icon1:'./public/imgs/stars1.png',
+          icon2:'./public/imgs/stars3.png',
+          show:false
+        }
+      },
+      methods:{
+        onChange1(value) {
+          if(value<=1){
+            this.text1="很差"
+          }
+          else if(value>=1.5&&value<=2){
+            this.text1="较差"
+          }
+          else if(value>=2.5&&value<=3.5){
+            this.text1="一般"
+          }
+          else if(value>=4&&value<=4.5){
+            this.text1="满意"
+          }
+          else if(value==5){
+            this.text1="超赞"
+          }
+    },
+    onChange2(value) {
+      if(value<=1){
+            this.text2="很差"
+          }
+          else if(value>=1.5&&value<=2){
+            this.text2="较差"
+          }
+          else if(value>=2.5&&value<=3.5){
+            this.text2="一般"
+          }
+          else if(value>=4&&value<=4.5){
+            this.text2="满意"
+          }
+          else if(value==5){
+            this.text2="超赞"
+          }
+    },
+    onChange3(value) {
+      if(value<=1){
+            this.text3="很差"
+          }
+          else if(value>=1.5&&value<=2){
+            this.text3="较差"
+          }
+          else if(value>=2.5&&value<=3.5){
+            this.text3="一般"
+          }
+          else if(value>=4&&value<=4.5){
+            this.text3="满意"
+          }
+          else if(value==5){
+            this.text3="超赞"
+          }
+    },
+    upForm(){
+      this.show=true
+    }
+      },
+      beforeCreate(){
+          let vueDom =document.getElementById("vue")
+           vueDom.style.display="block"
+        },
+      created(){
+        
+      }
+
+
+    })
+  </script>
+</body>
+</html>
