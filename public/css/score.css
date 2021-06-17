@@ -38,6 +38,7 @@
   box-sizing: border-box;
   padding: 78px 25px 36px 25px;
   box-sizing: border-box;
+  background-size: cover;
 }
 
 .scoreBody .wzIcon {
@@ -84,6 +85,7 @@
   font-weight: 500;
   color: #666666;
   line-height: 26px;
+  margin-top: 14px;
 }
 .scoreBody .questions .question .select {
   margin-top: 32px;
